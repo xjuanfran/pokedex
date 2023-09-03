@@ -1,5 +1,5 @@
 const baseUrl = 'https://pokeapi.co/api/v2/pokemon/';
-const inputPokemon = document.getElementById('pokemon'); // Cambiando el nombre de la variable
+const inputPokemon = document.getElementById('pokemon');
 const btn = document.getElementById('btn');
 const info = document.getElementById('info');
 
@@ -15,10 +15,11 @@ const insertPokemon = async() =>{
 			type: pokemonDataJSON.types,
 			abilities: pokemonDataJSON.abilities
 		}
-        
+
         //update de DOM with the pokemon data
         pokemonName.textContent = pokemonData.name;
         pokemonImage.src = pokemonData.img;
+        pokemonImage.alt = pokemonData.name;
         pokemonType.textContent = pokemonData.type.map(type => type.type.name).join(', ');
         pokemonAbilities.textContent = pokemonData.abilities.map(ability => ability.ability.name).join(', ');
 
