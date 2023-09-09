@@ -5,19 +5,40 @@ const info = document.getElementById('info');
 
 const insertPokemon = async () => {
 
+  loader.style.display = 'block';
+
   //Implementing with AJAX
   xhr = new XMLHttpRequest();
   xhr.onload = function () {
     if (xhr.status != 200) {
       alert("That pokemon isn't available. Try againt with another one!");
+      location.reload();
     } else {
       const pokemonData = JSON.parse(xhr.response);
       pokemonName.textContent = pokemonData.name;
       pokemonImage.src = pokemonData.sprites.front_default;
       pokemonImage.alt = pokemonData.name;
-      pokemonType.textContent = pokemonData.types.map(type => type.type.name).join(', ');
-      pokemonAbilities.textContent = pokemonData.abilities.map(ability => ability.ability.name).join(', ');
+
+      //Clean the info before insert the new one
+      pokemonType.textContent = "";
+      pokemonAbilities.textContent = "";
+
+      pokemonData.types.forEach(type => {
+        const typeElement = document.createElement('li');
+        typeElement.textContent = type.type.name;
+        pokemonType.appendChild(typeElement);
+      }
+      );
+
+      pokemonData.abilities.forEach(ability => {
+        const abilityElement = document.createElement('li');
+        abilityElement.textContent = ability.ability.name;
+        pokemonAbilities.appendChild(abilityElement);
+      }
+      );
+      loader.style.display = 'none';
     }
+
     //Implementing the same with fetch :)
     /**
      * try{
@@ -41,7 +62,6 @@ const insertPokemon = async () => {
       alert("That pokemon isn't available. Try againt with another one!");
     }
     **/
-
   }
   xhr.open('GET', `${baseUrl}${inputPokemon.value.toLowerCase()}`);
   xhr.send();

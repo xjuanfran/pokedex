@@ -12,7 +12,10 @@
 <body>
   <main>
 
-    <img src="images/title.png" alt="Title pokedex" class="title">
+    <div class="intro">
+      <img src="images/title.png" alt="Title pokedex" class="title">
+      <div class="loader" id="loader"></div>
+    </div>
 
     <section class="search">
       <span class="id">ID </span><input type="text" id="pokemon" placeholder="Name or id">
@@ -24,11 +27,9 @@
         <img id="pokemonImage">
       </div>
       <p>Name: <span id="pokemonName"></span></p>
-      <p>Types: <span id="pokemonType"></span></p>
-      <p>Abilities: <span id="pokemonAbilities"></span></p>
+      <p>Types: <ol id="pokemonType"></ol></p>
+      <p>Abilities:<ol id="pokemonAbilities"></ol></p>
     </section>
-
-
   </main>
 
 </body>
